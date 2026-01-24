@@ -13,7 +13,6 @@ WORKDIR /app
 
 COPY --from=build /app .
 
-# Create non-root user
 RUN addgroup -S appGroup && adduser -S appUser -G appGroup
 
 # Remove npm toolchain from runtime to avoid npm-bundled CVEs
