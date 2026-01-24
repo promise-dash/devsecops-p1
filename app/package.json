@@ -1,15 +1,19 @@
 {
   "name": "app",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Promise Dash",
   "license": "ISC",
   "dependencies": {
     "express": "^5.2.1"
+  },
+  "overrides": {
+    "cross-spawn": "^7.0.5",
+    "glob": "^10.5.0",
+    "tar": "^7.5.4"
   }
 }
