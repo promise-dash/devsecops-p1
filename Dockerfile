@@ -11,7 +11,6 @@ COPY app/ .
 FROM node:20-alpine
 WORKDIR /app
 
-# Copy only what we need to run
 COPY --from=build /app .
 
 # Create non-root user
