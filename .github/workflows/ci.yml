@@ -35,9 +35,33 @@ jobs:
             -Dsonar.projectKey=${{ vars.SONAR_PROJECT_KEY }}
             -Dsonar.organization=${{ vars.SONAR_ORG }}
 
-      - name: SonarCloud Quality Gate
-        uses: SonarSource/sonarqube-quality-gate-action@v1.1.0
-        timeout-minutes: 5
+      - name: SonarCloud Quality Gate (API)
+        shell: bash
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_PROJECT_KEY: ${{ vars.SONAR_PROJECT_KEY }}
+        run: |
+          set -euo pipefail
+
+          # Wait a bit for SonarCloud to finish processing the analysis
+          for i in {1..20}; do
+            STATUS=$(curl -s -u "${SONAR_TOKEN}:" \
+              "https://sonarcloud.io/api/qualitygates/project_status?projectKey=${SONAR_PROJECT_KEY}" \
+              | python3 -c "import sys,json; print(json.load(sys.stdin)['projectStatus']['status'])")
+            echo "Quality Gate status: ${STATUS}"
+
+            if [ "${STATUS}" = "OK" ]; then
+              exit 0
+            fi
+
+            if [ "${STATUS}" = "ERROR" ]; then
+              echo "Quality Gate failed."
+              exit 1
+            fi
+
+            # Status can be NONE/PENDING while processing
+            sleep 10
+          done
+
+          echo "Timed out waiting for Quality Gate result."
+          exit 1
