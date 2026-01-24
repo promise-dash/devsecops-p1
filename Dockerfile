@@ -13,9 +13,6 @@ WORKDIR /app
 
 COPY --from=build /app .
 
-RUN addgroup -S appGroup && adduser -S appUser -G appGroup
-USER appUser
-
 EXPOSE 3000
 
 CMD ["node", "server.js"]
