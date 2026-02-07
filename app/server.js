@@ -1,8 +1,6 @@
 const express = require("express");
 const app = express();
 
-const unused = 123;
-
 app.get("/health", (req, res) => {
   res.json({ status: "ok" });
 });
