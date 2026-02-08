@@ -24,7 +24,7 @@ spec:
         - name: devsecops-pod
           image: acrdevsecopsp2.azurecr.io/devsecops:f1cca725f5357dba2643a65037286f9d12328728
           ports:
-            - containerPort: 3000
+            - containerPort: 8000
           livenessProbe:
             httpGet:
               path: /
