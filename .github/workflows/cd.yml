@@ -1,4 +1,4 @@
-name: cd-to-aks-staging
+name: CD - Deploy
 
 on:
   push:
@@ -28,6 +28,11 @@ jobs:
         with:
           resource-group: rg-devsecops-p2
           cluster-name: aks-devsecops-p2
+
+      - name: Install kubelogin
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y kubelogin
 
       - name: Deploy manifests
         run: |
