@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: devsecops-service
+  namespace: staging
+spec:
+  type: ClusterIP
+  selector:
+    app: devsecops
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 3000
