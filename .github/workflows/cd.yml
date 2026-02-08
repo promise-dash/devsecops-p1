@@ -34,6 +34,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y kubelogin
 
+      - name: Convert kubeconfig for non-interactive login
+        run: |
+          kubelogin convert-kubeconfig -l azurecli
+
       - name: Deploy manifests
         run: |
           kubectl apply -f k8s/staging/ -n staging
