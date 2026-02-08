@@ -6,7 +6,7 @@ on:
     branches: ["main"]
     paths:
       - "k8s/**"
-      - ".github/workflows/cd.yaml"
+      - ".github/workflows/cd.yml"
 
 permissions:
   id-token: write
