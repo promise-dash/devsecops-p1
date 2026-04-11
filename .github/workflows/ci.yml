@@ -25,7 +25,7 @@ jobs:
           docker build --pull --no-cache -t $IMAGE_TAG .
 
       - name: Scan image with Trivy
-        uses: aquasecurity/trivy-action@0.20.0
+        uses: aquasecurity/trivy-action@0.35.0
         with:
           image-ref: ${{ env.IMAGE_TAG }}
           severity: CRITICAL,HIGH
